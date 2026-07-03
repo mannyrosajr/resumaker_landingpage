@@ -1,9 +1,45 @@
 .site-shell {
+  position: relative;
   min-height: 100svh;
   overflow: hidden;
   background:
-    radial-gradient(circle at 82% 10%, rgba(44, 131, 255, 0.22), transparent 28%),
-    linear-gradient(180deg, #02050b 0%, #060a12 48%, #02050b 100%);
+    radial-gradient(circle at 82% 10%, rgba(44, 131, 255, 0.2), transparent 30%),
+    radial-gradient(circle at 10% 42%, rgba(124, 58, 237, 0.12), transparent 32%),
+    radial-gradient(circle at 70% 85%, rgba(34, 211, 238, 0.08), transparent 30%),
+    linear-gradient(180deg, #020409 0%, #060b16 48%, #020409 100%);
+}
+
+/* Aurora blobs the glass blurs over */
+.site-shell::before,
+.site-shell::after {
+  position: fixed;
+  z-index: 0;
+  width: 58vw;
+  height: 58vw;
+  border-radius: 50%;
+  filter: blur(90px);
+  content: '';
+  pointer-events: none;
+}
+
+.site-shell::before {
+  top: -22vw;
+  right: -16vw;
+  background: radial-gradient(circle, rgba(44, 131, 255, 0.17), transparent 62%);
+  animation: aurora-a 26s ease-in-out infinite alternate;
+}
+
+.site-shell::after {
+  bottom: -26vw;
+  left: -18vw;
+  background: radial-gradient(circle, rgba(168, 85, 247, 0.14), transparent 62%);
+  animation: aurora-b 32s ease-in-out infinite alternate;
+}
+
+.site-shell > main,
+.site-shell > .site-footer {
+  position: relative;
+  z-index: 1;
 }
 
 .site-header {
@@ -17,8 +53,9 @@
   min-height: 72px;
   padding: 0 clamp(20px, 5vw, 80px);
   border-bottom: 1px solid var(--line);
-  background: rgba(2, 5, 11, 0.82);
-  backdrop-filter: blur(20px);
+  background: rgba(3, 6, 14, 0.55);
+  backdrop-filter: blur(26px) saturate(180%);
+  -webkit-backdrop-filter: blur(26px) saturate(180%);
 }
 
 .brand {
@@ -196,6 +233,9 @@ h3 {
   color: var(--ink);
   border: 1px solid var(--line-strong);
   background: rgba(255, 255, 255, 0.07);
+  backdrop-filter: blur(18px) saturate(160%);
+  -webkit-backdrop-filter: blur(18px) saturate(160%);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.14);
 }
 
 .hero-proof {
@@ -211,20 +251,24 @@ h3 {
   align-items: center;
   min-height: 34px;
   padding: 0 12px;
-  border: 1px solid var(--line);
+  border: 1px solid rgba(255, 255, 255, 0.16);
   border-radius: 999px;
-  background: rgba(255, 255, 255, 0.05);
+  background: rgba(255, 255, 255, 0.06);
+  backdrop-filter: blur(18px) saturate(160%);
+  -webkit-backdrop-filter: blur(18px) saturate(160%);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.14);
 }
 
 .hero-visual {
   min-width: 0;
   padding: 10px;
-  border: 1px solid rgba(255, 255, 255, 0.14);
+  border: 1px solid rgba(255, 255, 255, 0.2);
   border-radius: 22px;
-  background:
-    linear-gradient(180deg, rgba(255, 255, 255, 0.14), rgba(255, 255, 255, 0.04)),
-    rgba(255, 255, 255, 0.04);
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.12), rgba(255, 255, 255, 0.03));
+  backdrop-filter: blur(30px) saturate(170%);
+  -webkit-backdrop-filter: blur(30px) saturate(170%);
   box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.3),
     0 40px 120px rgba(0, 0, 0, 0.48),
     0 0 80px rgba(28, 115, 255, 0.16);
 }
@@ -304,12 +348,15 @@ h3 {
 .step-card,
 .price-card,
 .faq-item {
-  border: 1px solid var(--line);
-  border-radius: 14px;
-  background:
-    linear-gradient(180deg, rgba(255, 255, 255, 0.07), rgba(255, 255, 255, 0.035)),
-    rgba(255, 255, 255, 0.04);
-  box-shadow: 0 22px 70px rgba(0, 0, 0, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  border-radius: 18px;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.09), rgba(255, 255, 255, 0.03));
+  backdrop-filter: blur(28px) saturate(170%);
+  -webkit-backdrop-filter: blur(28px) saturate(170%);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.22),
+    inset 0 -1px 0 rgba(255, 255, 255, 0.05),
+    0 22px 70px rgba(0, 0, 0, 0.28);
 }
 
 .list-card {
@@ -486,9 +533,7 @@ h3 {
 }
 
 .pricing-section {
-  background:
-    linear-gradient(180deg, rgba(255, 255, 255, 0.02), rgba(255, 255, 255, 0.045)),
-    #050912;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.02), rgba(255, 255, 255, 0.045));
 }
 
 .pricing-grid {
@@ -509,20 +554,23 @@ h3 {
 
 .price-card.featured {
   border-color: rgba(74, 149, 255, 0.68);
-  background:
-    linear-gradient(180deg, rgba(34, 114, 255, 0.2), rgba(255, 255, 255, 0.06)),
-    rgba(255, 255, 255, 0.055);
+  background: linear-gradient(180deg, rgba(34, 114, 255, 0.18), rgba(255, 255, 255, 0.05));
   box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.28),
     0 36px 100px rgba(0, 0, 0, 0.32),
     0 0 80px rgba(28, 115, 255, 0.18);
 }
 
 .price-card.premium {
   border-color: rgba(168, 85, 247, 0.62);
-  background:
-    linear-gradient(155deg, rgba(168, 85, 247, 0.28), rgba(28, 115, 255, 0.12) 48%, rgba(255, 255, 255, 0.055)),
-    rgba(255, 255, 255, 0.055);
+  background: linear-gradient(
+    155deg,
+    rgba(168, 85, 247, 0.24),
+    rgba(28, 115, 255, 0.1) 48%,
+    rgba(255, 255, 255, 0.05)
+  );
   box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.28),
     0 36px 100px rgba(0, 0, 0, 0.32),
     0 0 76px rgba(168, 85, 247, 0.16);
 }
@@ -590,7 +638,9 @@ h3 {
   align-items: center;
   padding: 32px clamp(20px, 5vw, 80px);
   border-top: 1px solid var(--line);
-  background: #02050b;
+  background: rgba(2, 5, 11, 0.6);
+  backdrop-filter: blur(20px) saturate(160%);
+  -webkit-backdrop-filter: blur(20px) saturate(160%);
 }
 
 .site-footer p {
@@ -686,6 +736,26 @@ h3 {
   }
 }
 
+@keyframes aurora-a {
+  from {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+
+  to {
+    transform: translate3d(-16vw, 12vw, 0) scale(1.25);
+  }
+}
+
+@keyframes aurora-b {
+  from {
+    transform: translate3d(0, 0, 0) scale(1.15);
+  }
+
+  to {
+    transform: translate3d(14vw, -10vw, 0) scale(0.95);
+  }
+}
+
 /* Scroll reveal */
 [data-reveal] {
   opacity: 0;
@@ -737,6 +807,10 @@ h3 {
 }
 
 /* Gradient headline accent */
+.nowrap {
+  white-space: nowrap;
+}
+
 .grad-text {
   background: linear-gradient(90deg, #7db2ff 0%, #2c83ff 35%, #a855f7 70%, #7db2ff 100%);
   background-size: 220% 100%;
@@ -824,6 +898,7 @@ h3 {
   transform: translateY(-4px);
   border-color: rgba(125, 178, 255, 0.38);
   box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.28),
     0 28px 80px rgba(0, 0, 0, 0.3),
     0 0 44px rgba(44, 131, 255, 0.12);
 }
@@ -832,6 +907,7 @@ h3 {
   transform: translateX(6px);
   border-color: rgba(125, 178, 255, 0.38);
   box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.28),
     0 28px 80px rgba(0, 0, 0, 0.3),
     0 0 44px rgba(44, 131, 255, 0.12);
 }
@@ -840,6 +916,7 @@ h3 {
   transform: translateY(-6px);
   border-color: rgba(125, 178, 255, 0.45);
   box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.3),
     0 36px 100px rgba(0, 0, 0, 0.36),
     0 0 60px rgba(44, 131, 255, 0.16);
 }
@@ -847,6 +924,7 @@ h3 {
 .price-card.premium:hover {
   border-color: rgba(196, 132, 252, 0.75);
   box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.3),
     0 36px 100px rgba(0, 0, 0, 0.36),
     0 0 60px rgba(168, 85, 247, 0.2);
 }

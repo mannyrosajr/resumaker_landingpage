@@ -227,7 +227,9 @@ function App() {
         <section className="hero-section" aria-labelledby="hero-title">
           <div className="hero-copy-wrap">
             <h1 id="hero-title">
-              Resumaker. <span className="grad-text">Stand out today.</span>
+              Resumaker.
+              <br />
+              <span className="grad-text nowrap">Stand out today.</span>
             </h1>
             <p className="hero-copy">
               A Chrome extension that turns the job posting in your current tab
