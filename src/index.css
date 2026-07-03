@@ -8,9 +8,10 @@
   --blue: #2c83ff;
   --blue-soft: #7db2ff;
   --green: #31d48b;
-  --sans: 'Aptos', 'Segoe UI Variable', ui-sans-serif, system-ui, sans-serif;
-  --display: 'Bahnschrift', 'Aptos Display', 'Segoe UI Variable Display',
-    'Arial Narrow', ui-sans-serif, system-ui, sans-serif;
+  --sans: 'Inter', 'Aptos', 'Segoe UI Variable', ui-sans-serif, system-ui, sans-serif;
+  --display: 'Space Grotesk', 'Bahnschrift', 'Segoe UI Variable Display',
+    ui-sans-serif, system-ui, sans-serif;
+  --mono: 'JetBrains Mono', ui-monospace, 'Cascadia Code', Consolas, monospace;
 
   color: var(--body);
   background: var(--page-bg);
@@ -63,4 +64,28 @@ button:focus-visible {
 ::selection {
   color: #ffffff;
   background: var(--blue);
+}
+
+::-webkit-scrollbar {
+  width: 12px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--page-bg);
+}
+
+::-webkit-scrollbar-thumb {
+  border: 3px solid var(--page-bg);
+  border-radius: 99px;
+  background: rgba(255, 255, 255, 0.16);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(125, 178, 255, 0.4);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
 }

@@ -1,3 +1,4 @@
+import { useEffect } from 'react'
 import heroPic from './assets/hero-pic.png'
 import resumakerIcon from './assets/resumaker-icon.svg'
 import './App.css'
@@ -120,12 +121,13 @@ const plans = [
     includes: [
       'Profile builder',
       'Job detection',
-      'AI skill gap prompts',
+      'Smart gap questions',
       'One-page PDF export',
-      'Searchable history',
+      'Saved resume history',
     ],
     cta: 'Choose Plus',
     featured: true,
+    badge: 'Most popular',
   },
   {
     name: 'Pro',
@@ -134,15 +136,15 @@ const plans = [
     includes: [
       'Profile builder',
       'Job detection',
-      'AI skill gap prompts',
+      'Smart gap questions',
       'One-page PDF export',
-      'Searchable history',
-      'Resume-to-job fit rating',
+      'Saved resume history',
+      'Fit rating + how to improve',
       'AI-assisted revision',
-      'Retry tools',
     ],
     cta: 'Choose Pro',
     premium: true,
+    badge: 'Best value',
   },
 ]
 
@@ -163,13 +165,44 @@ const faqs = [
       'Under 30 seconds. At that pace, you can generate up to 20 tailored resumes in 10 minutes.',
   },
   {
+    question: 'Will my resume get past ATS?',
+    answer:
+      'That is the point. Resumaker mirrors the language of the posting so applicant tracking systems rank you higher, and formats everything to parse cleanly on one page.',
+  },
+  {
+    question: 'Is my data safe?',
+    answer:
+      'Yes. You sign in securely with Google or LinkedIn, your profile stays yours, and the AI runs server-side so the API key is never exposed.',
+  },
+  {
     question: 'How is this different from another AI tool?',
     answer:
-      'It is faster and more reliable. You do not leave the posting, paste the job description, or clean up a long generic draft. Resumaker works from the current tab and writes for a one-page resume.',
+      'It is faster and more reliable. You do not leave the posting, paste the job description, or clean up a long generic draft. Resumaker works from the current tab and is built on a frontier model, Claude Sonnet 5, with a hand-tuned expert-resume prompt written for a real one-page resume.',
   },
 ]
 
 function App() {
+  useEffect(() => {
+    const els = Array.from(document.querySelectorAll('[data-reveal]'))
+    if (!('IntersectionObserver' in window)) {
+      els.forEach((el) => el.classList.add('is-visible'))
+      return undefined
+    }
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-visible')
+            observer.unobserve(entry.target)
+          }
+        })
+      },
+      { threshold: 0.12, rootMargin: '0px 0px -48px 0px' },
+    )
+    els.forEach((el) => observer.observe(el))
+    return () => observer.disconnect()
+  }, [])
+
   return (
     <div className="site-shell">
       <header className="site-header" aria-label="Main navigation">
@@ -193,7 +226,9 @@ function App() {
       <main id="top">
         <section className="hero-section" aria-labelledby="hero-title">
           <div className="hero-copy-wrap">
-            <h1 id="hero-title">Resumaker. Stand out today.</h1>
+            <h1 id="hero-title">
+              Resumaker. <span className="grad-text">Stand out today.</span>
+            </h1>
             <p className="hero-copy">
               A Chrome extension that turns the job posting in your current tab
               into a tailored, one-page resume. No paste box. No resume rewrite
@@ -224,13 +259,18 @@ function App() {
         </section>
 
         <section className="section detour-section" id="why" aria-labelledby="why-title">
-          <div className="section-heading">
+          <div className="section-heading" data-reveal>
             <p className="eyebrow">The problem</p>
             <h2 id="why-title">Leaving the tab costs momentum.</h2>
           </div>
           <div className="detour-grid">
-            {detour.map((group) => (
-              <article className="list-card align-start" key={group.title}>
+            {detour.map((group, i) => (
+              <article
+                className="list-card align-start"
+                key={group.title}
+                data-reveal
+                style={{ '--d': `${i * 110}ms` }}
+              >
                 <h3>{group.title}</h3>
                 <ul>
                   {group.items.map((item) => (
@@ -243,13 +283,18 @@ function App() {
         </section>
 
         <section className="section split-section" id="flow" aria-labelledby="flow-title">
-          <div className="section-heading sticky-heading">
+          <div className="section-heading sticky-heading" data-reveal>
             <p className="eyebrow">The flow</p>
             <h2 id="flow-title">Built for the application tab.</h2>
           </div>
           <div className="steps">
-            {steps.map((step) => (
-              <article className="step-card" key={step.title}>
+            {steps.map((step, i) => (
+              <article
+                className="step-card"
+                key={step.title}
+                data-reveal
+                style={{ '--d': `${i * 90}ms` }}
+              >
                 <span>{step.label}</span>
                 <div>
                   <h3>{step.title}</h3>
@@ -261,25 +306,38 @@ function App() {
         </section>
 
         <section className="section fit-section" id="fit" aria-labelledby="fit-title">
-          <div className="section-heading">
+          <div className="section-heading" data-reveal>
             <p className="eyebrow">The advantage</p>
             <h2 id="fit-title">Tailoring changes the signal.</h2>
             <p>
-              A resume should lead with the proof that matches the role, then
-              cut what does not help.
+              Resumaker leads with the proof that matches the role, mirrors the
+              posting's own keywords so ATS software ranks you higher, quantifies
+              your impact, and cuts what does not help.
             </p>
           </div>
           <div className="role-grid">
-            {roleSignals.map((signal) => (
-              <article className="role-card" key={signal.role}>
+            {roleSignals.map((signal, i) => (
+              <article
+                className="role-card"
+                key={signal.role}
+                data-reveal
+                style={{ '--d': `${i * 100}ms` }}
+              >
                 <span>{signal.role}</span>
                 <p>{signal.text}</p>
               </article>
             ))}
           </div>
           <div className="proof-strip" aria-label="Supporting sources">
-            {proofNotes.map((note) => (
-              <a href={note.url} target="_blank" rel="noreferrer" key={note.title}>
+            {proofNotes.map((note, i) => (
+              <a
+                href={note.url}
+                target="_blank"
+                rel="noreferrer"
+                key={note.title}
+                data-reveal
+                style={{ '--d': `${i * 100}ms` }}
+              >
                 <strong>{note.title}</strong>
                 <span>{note.text}</span>
                 <em>{note.source}</em>
@@ -293,7 +351,7 @@ function App() {
           id="guardrails"
           aria-labelledby="guardrail-title"
         >
-          <div className="section-heading">
+          <div className="section-heading" data-reveal>
             <p className="eyebrow">The boundary</p>
             <h2 id="guardrail-title">Frame it better. Do not fake it.</h2>
             <p>
@@ -302,8 +360,13 @@ function App() {
             </p>
           </div>
           <div className="guardrail-grid">
-            {guardrails.map((group) => (
-              <article className="list-card align-start" key={group.title}>
+            {guardrails.map((group, i) => (
+              <article
+                className="list-card align-start"
+                key={group.title}
+                data-reveal
+                style={{ '--d': `${i * 110}ms` }}
+              >
                 <h3>{group.title}</h3>
                 <ul>
                   {group.items.map((item) => (
@@ -320,16 +383,19 @@ function App() {
           id="pricing"
           aria-labelledby="pricing-title"
         >
-          <div className="section-heading centered">
+          <div className="section-heading centered" data-reveal>
             <p className="eyebrow">Pricing</p>
             <h2 id="pricing-title">Pick your application pace.</h2>
           </div>
           <div className="pricing-grid">
-            {plans.map((plan) => (
+            {plans.map((plan, i) => (
               <article
                 className={`price-card ${plan.featured ? 'featured' : ''} ${plan.premium ? 'premium' : ''}`}
                 key={plan.name}
+                data-reveal
+                style={{ '--d': `${i * 110}ms` }}
               >
+                {plan.badge && <span className="plan-badge">{plan.badge}</span>}
                 <h3>{plan.name}</h3>
                 <p className="price">{plan.price}</p>
                 <p className="plan-detail">{plan.detail}</p>
@@ -348,17 +414,35 @@ function App() {
         </section>
 
         <section className="section faq-section" id="faq" aria-labelledby="faq-title">
-          <div className="section-heading sticky-heading">
+          <div className="section-heading sticky-heading" data-reveal>
             <p className="eyebrow">FAQ</p>
             <h2 id="faq-title">Straight answers.</h2>
           </div>
           <div className="faq-list">
-            {faqs.map((faq) => (
-              <article className="faq-item" key={faq.question}>
+            {faqs.map((faq, i) => (
+              <article
+                className="faq-item"
+                key={faq.question}
+                data-reveal
+                style={{ '--d': `${i * 70}ms` }}
+              >
                 <h3>{faq.question}</h3>
                 <p>{faq.answer}</p>
               </article>
             ))}
+          </div>
+        </section>
+        <section className="section closing-section" id="get-started" aria-labelledby="cta-title">
+          <div className="section-heading centered" data-reveal>
+            <p className="eyebrow">Get started</p>
+            <h2 id="cta-title">Land more interviews. Start free.</h2>
+            <p>
+              Build your profile once, then tailor a focused resume to every job
+              you apply to. Your first three are on us.
+            </p>
+            <a className="primary-button closing-cta" href="#pricing">
+              Add to Chrome
+            </a>
           </div>
         </section>
       </main>
