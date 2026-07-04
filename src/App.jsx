@@ -457,8 +457,8 @@ function App() {
         <p>Tailored one-page resumes from the job posting you are viewing.</p>
         <div className="footer-links">
           <a href="mailto:contact@resumaker.app">Contact</a>
-          <a href="#top">Privacy</a>
-          <a href="#top">Terms</a>
+          <a href="/privacy">Privacy</a>
+          <a href="/terms">Terms</a>
         </div>
       </footer>
     </div>
