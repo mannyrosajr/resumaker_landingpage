@@ -1,6 +1,11 @@
 import { useEffect } from 'react'
 import heroPic from './assets/hero-pic.png'
 import resumakerIcon from './assets/resumaker-icon.svg'
+import shotDetect from './assets/shot-detect.png'
+import shotQuestions from './assets/shot-questions.png'
+import shotGenerating from './assets/shot-generating.png'
+import fitStrong from './assets/fit-strong.png'
+import fitFlag from './assets/fit-flag.png'
 import './App.css'
 
 const detour = [
@@ -82,6 +87,43 @@ const steps = [
     label: '04',
     title: 'Export and apply',
     text: 'Preview, copy, or download a one-page PDF without turning the application into another editing session.',
+  },
+]
+
+const tourShots = [
+  {
+    img: shotDetect,
+    alt: 'Resumaker popup showing a detected Data Science Analyst posting with a Generate Tailored Resume button',
+    title: 'It already read the posting.',
+    text: 'Open a job and the extension has detected it. One click to generate — no copy-paste.',
+  },
+  {
+    img: shotQuestions,
+    alt: 'Quick questions screen asking short clarifying questions before writing the resume',
+    title: 'It asks before it writes.',
+    text: 'Quick questions cover real gaps, so nothing gets invented and nothing important is missed.',
+  },
+  {
+    img: shotGenerating,
+    alt: 'Crafting your resume progress screen: reading the posting, matching experience, writing tailored bullets, polishing the page',
+    title: 'About half a minute.',
+    text: 'It reads, matches, writes, and fits everything to one page while you stay on the tab.',
+  },
+]
+
+const ratingShots = [
+  {
+    img: fitStrong,
+    alt: 'Fit rating of 88 with a green score ring, matched skills, and a How to improve panel',
+    title: 'A strong match, confirmed.',
+    text: 'An 88 with the exact skills you matched — apply with confidence.',
+  },
+  {
+    img: fitFlag,
+    alt: 'Fit rating of 45 with a red score ring flagging an eligibility issue, plus gaps and concrete fixes',
+    fade: true,
+    title: 'An honest flag, early.',
+    text: 'A 45 catches an eligibility issue before you spend the application — with concrete ways to get stronger, not vague filler.',
   },
 ]
 
@@ -307,6 +349,25 @@ function App() {
           </div>
         </section>
 
+        <section className="section tour-section" id="tour" aria-labelledby="tour-title">
+          <div className="section-heading centered" data-reveal>
+            <p className="eyebrow">In the extension</p>
+            <h2 id="tour-title">What it looks like in the moment.</h2>
+          </div>
+          <div className="tour-grid">
+            {tourShots.map((shot, i) => (
+              <figure className="shot-card" key={shot.title} data-reveal style={{ '--d': `${i * 110}ms` }}>
+                <div className="shot-frame">
+                  <img src={shot.img} alt={shot.alt} loading="lazy" />
+                </div>
+                <figcaption>
+                  <strong>{shot.title}</strong> {shot.text}
+                </figcaption>
+              </figure>
+            ))}
+          </div>
+        </section>
+
         <section className="section fit-section" id="fit" aria-labelledby="fit-title">
           <div className="section-heading" data-reveal>
             <p className="eyebrow">The advantage</p>
@@ -376,6 +437,35 @@ function App() {
                   ))}
                 </ul>
               </article>
+            ))}
+          </div>
+        </section>
+
+        <section className="section rating-section" id="rating" aria-labelledby="rating-title">
+          <div className="section-heading centered" data-reveal>
+            <p className="eyebrow">Pro spotlight</p>
+            <h2 id="rating-title">Know where you stand before you apply.</h2>
+            <p>
+              Every Pro resume includes a fit rating: a real score, the skills
+              you matched, the gaps that remain, and exactly how to strengthen
+              your profile.
+            </p>
+          </div>
+          <div className="rating-grid">
+            {ratingShots.map((shot, i) => (
+              <figure className="shot-card" key={shot.title} data-reveal style={{ '--d': `${i * 130}ms` }}>
+                <div className="shot-frame">
+                  <img
+                    className={shot.fade ? 'shot-fade' : undefined}
+                    src={shot.img}
+                    alt={shot.alt}
+                    loading="lazy"
+                  />
+                </div>
+                <figcaption>
+                  <strong>{shot.title}</strong> {shot.text}
+                </figcaption>
+              </figure>
             ))}
           </div>
         </section>
