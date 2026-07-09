@@ -41,7 +41,7 @@ const sections = [
         items: [
           'Free plan — a limited number of resume generations at no cost, as described in the extension.',
           'Plus and Pro plans — paid monthly subscriptions that include a higher (Pro: high-volume, marketed as unlimited but subject to a fair-use monthly cap) number of resume generations and additional features, as described on our pricing page at the time of purchase.',
-          "Payments are processed by LemonSqueezy, our merchant of record. LemonSqueezy handles billing, taxes, and payment security; by subscribing, you also agree to LemonSqueezy's terms of sale.",
+          'Payments are processed securely by Stripe; Resumaker is the seller of record for your subscription. Card details are handled by Stripe, not stored by us. By subscribing you also agree to any applicable Stripe terms presented at checkout.',
           'Subscriptions renew automatically each month until canceled. You can cancel anytime through the billing portal accessible from within the extension; you will retain access through the end of the period you already paid for.',
           'Monthly generation quotas do not roll over or stack — unused generations are forfeited at the end of each billing period or refill window.',
           'Refunds are handled on a case-by-case basis. Contact us at the email below to request one.',
@@ -104,7 +104,7 @@ const sections = [
     body: [
       {
         type: 'p',
-        text: 'Resumaker relies on third-party providers, including Google Firebase, Anthropic, and LemonSqueezy, to operate. We are not responsible for outages, errors, or changes originating from these providers.',
+        text: 'Resumaker relies on third-party providers, including Google Firebase, Anthropic, and Stripe, to operate. We are not responsible for outages, errors, or changes originating from these providers.',
       },
     ],
   },
@@ -177,7 +177,7 @@ function Terms() {
         <section className="section legal-hero" aria-labelledby="legal-title">
           <p className="eyebrow">Legal</p>
           <h1 id="legal-title">Terms of Service</h1>
-          <p className="legal-updated">Resumaker &middot; Last updated: July 3, 2026</p>
+          <p className="legal-updated">Resumaker &middot; Last updated: July 9, 2026</p>
           <p className="legal-intro">
             These Terms of Service ("Terms") govern your use of Resumaker, a Chrome
             extension that generates tailored resumes using AI. By installing or using
