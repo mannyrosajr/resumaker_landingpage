@@ -260,7 +260,12 @@ function App() {
           <a href="#pricing">Pricing</a>
           <a href="#faq">FAQ</a>
         </nav>
-        <a className="header-cta" href="#pricing">
+        <a
+          className="header-cta"
+          href="https://chromewebstore.google.com/detail/resumaker/lppahhcpfgjbogieonnpkildlneikoop"
+          target="_blank"
+          rel="noreferrer"
+        >
           Add to Chrome
         </a>
       </header>
@@ -279,7 +284,12 @@ function App() {
               detour. No coming back to the application cold.
             </p>
             <div className="hero-actions">
-              <a className="primary-button" href="#pricing">
+              <a
+                className="primary-button"
+                href="https://chromewebstore.google.com/detail/resumaker/lppahhcpfgjbogieonnpkildlneikoop"
+                target="_blank"
+                rel="noreferrer"
+              >
                 Add to Chrome
               </a>
               <a className="secondary-button" href="#why">
@@ -532,7 +542,12 @@ function App() {
               Build your profile once, then tailor a focused resume to every job
               you apply to. Your first three are on us.
             </p>
-            <a className="primary-button closing-cta" href="#pricing">
+            <a
+              className="primary-button closing-cta"
+              href="https://chromewebstore.google.com/detail/resumaker/lppahhcpfgjbogieonnpkildlneikoop"
+              target="_blank"
+              rel="noreferrer"
+            >
               Add to Chrome
             </a>
           </div>
